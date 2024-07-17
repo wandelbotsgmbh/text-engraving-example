@@ -1,4 +1,4 @@
-# WandelUI
+# Text Engraving with Wandelscript
 
 An example of a minimal application for engraving character strings, e.g. names, with the help of Wandelscript. 
 
