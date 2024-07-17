@@ -14,9 +14,10 @@ https://github.com/user-attachments/assets/cfb8cd3f-36c4-4814-80e5-1624b6bc24da
 ## Overview
 
 ### Set-up
-Used Set-Up for the demo seen in the project: 
-robot: Yaskawa AR 1440 industrial robot 
-tool:  AMB milling motor 1400 FME-P 230V (for ER20 precision collets) 
+Used Set-Up for the demo seen in the project:  
+ 
+- robot: Yaskawa AR 1440 industrial robot  
+- tool:  AMB milling motor 1400 FME-P 230V (for ER20 precision collets)  
 
 robot        |  tool
 :-------------------------:|:-------------------------:
@@ -25,14 +26,11 @@ robot        |  tool
 
 To get the demo running, import the following robot settings `configuration.json` (which includes the robot model and TCP) into the settings App on the NOVA Home Screen. You can't directly use the configuration with a different setup but they serve as a guiding line.
 
-
-TOOL 1: 
-xyz 
-
-
 ## Usage
 
-The Wandelscript located in `text-engraving`, writes the text which is passed as a variable. 
+This application uses the boilerplate application which is shipped with the CLI.
+
+The Wandelscript located in `src/text-engraving`, writes the text which is passed as a variable. 
 
 The scripts accepts 5 arguments:
 - `cell_index`: the index of the cell in the grid (used in `writing_company`)
@@ -52,12 +50,11 @@ If you use a different setup you might need to adjust the script accordingly.
 
 ## Run Application
 
-### Install dependencies:
 ```bash
 npm install
 ```
-
-### Run app:
 ```bash
 npm run dev
 ```
+
+You can also install this application on the IPC using the CLI client.
