@@ -20,8 +20,7 @@ tool:  AMB milling motor 1400 FME-P 230V (for ER20 precision collets)
 
 robot        |  tool
 :-------------------------:|:-------------------------:
-![robot1](https://github.com/user-attachments/assets/ae2dfcbf-89d4-437f-85be-cbe68150bbdb)
-  | ![tool1](https://github.com/user-attachments/assets/36520de7-d3c3-4cb0-b199-16ae5e8f7248)
+![robot1](https://github.com/user-attachments/assets/ae2dfcbf-89d4-437f-85be-cbe68150bbdb) | ![tool1](https://github.com/user-attachments/assets/36520de7-d3c3-4cb0-b199-16ae5e8f7248)
 
 
 To get the demo running, import the following robot settings `configuration.json` (which includes the robot model and TCP) into the settings App on the NOVA Home Screen. You can't directly use the configuration with a different setup but they serve as a guiding line.
