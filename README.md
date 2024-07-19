@@ -53,6 +53,9 @@ If you use a different setup you might need to adjust the script accordingly.
 ```bash
 npm install
 ```
+
+Setup your .env.local to connect to your instance following the [documentation](https://docs.wandelbots.io/docs/development/nextjs/quickstart/).
+
 ```bash
 npm run dev
 ```
