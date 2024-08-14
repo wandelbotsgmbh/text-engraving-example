@@ -6,7 +6,8 @@ To use our platform, please sign up for our [Wandelbots Platform program](https:
 
 Interface             |  Result
 :-------------------------:|:-------------------------:
-![text-engraving-example-1](https://github.com/user-attachments/assets/19331589-c7d0-4991-9131-a27bcfdc46eb)  |  ![text-engraving-example-2](https://github.com/user-attachments/assets/962cc36e-d768-4e79-af5b-f98bb2ee277d)
+![349506499-19331589-c7d0-4991-9131-a27bcfdc46eb](https://github.com/user-attachments/assets/f6fe590a-fb58-486a-82b6-7793d045e643)  |  ![text-engraving-example-2](https://github.com/user-attachments/assets/962cc36e-d768-4e79-af5b-f98bb2ee277d)
+
 
 
 https://github.com/user-attachments/assets/cfb8cd3f-36c4-4814-80e5-1624b6bc24da
