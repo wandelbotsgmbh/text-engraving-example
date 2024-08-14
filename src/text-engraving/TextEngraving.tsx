@@ -113,7 +113,7 @@ export default function TextEngraving() {
         className="flex flex-col items-center"
       >
         <img
-          src="text-engraving/img/wb-nova-logo.png"
+          src="text-engraving/img/wb-logo.png"
           className="h-[32px] my-[16px]"
         ></img>
       </div>
