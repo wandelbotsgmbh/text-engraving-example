@@ -1,15 +1,14 @@
-import { WandelAPIWrapper } from "@wandelbots/wandelbots-api-wrapper"
+import { NovaClient } from "@wandelbots/wandelbots-js"
 import { env } from "./runtimeEnv"
 import type { AxiosRequestConfig } from "axios"
 
-let wandelApi: WandelAPIWrapper | null = null
+let nova: NovaClient | null = null
 
-export const getWandelApi = () => {
-  if (!wandelApi) {
-    wandelApi = new WandelAPIWrapper({
-      basePath: `${env.WANDELAPI_BASE_URL}/api/v1`,
-      // Don't know why this is in the type
-      isJsonMime: undefined as any,
+export const getNovaClient = () => {
+  if (!nova) {
+    nova = new NovaClient({
+      cellId:  env.CELL_ID ?? "cell",
+      instanceUrl: `${env.WANDELAPI_BASE_URL}`,
       username: env.NOVA_USERNAME,
       password: env.NOVA_PASSWORD,
       baseOptions: {
@@ -29,5 +28,5 @@ export const getWandelApi = () => {
     })
   }
 
-  return wandelApi
+  return nova
 }

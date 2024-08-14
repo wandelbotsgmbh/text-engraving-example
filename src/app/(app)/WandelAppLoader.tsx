@@ -1,7 +1,6 @@
 "use client"
 
-import { env } from "../../runtimeEnv"
-import { getWandelApi } from "../../getWandelApi"
+import { getNovaClient } from "../../getWandelApi"
 import { observer, useLocalObservable } from "mobx-react-lite"
 import { useEffect, type ReactNode } from "react"
 import { LoadingScreen } from "./LoadingScreen"
@@ -9,7 +8,7 @@ import { WandelApp } from "../../WandelApp"
 import { WandelAppContext } from "../../WandelAppContext"
 
 export const WandelAppLoader = observer((props: { children: ReactNode }) => {
-  const api = getWandelApi()
+  const nova = getNovaClient()
 
   const state = useLocalObservable(() => ({
     loading: "Initializing" as string | null,
@@ -31,16 +30,14 @@ export const WandelAppLoader = observer((props: { children: ReactNode }) => {
   }))
 
   async function loadWandelApp() {
-    const cell = env.CELL_ID ?? "cell"
-
     state.nowLoading(`Loading controllers`)
 
-    const controllersRes = await api.controller.listControllers(cell)
-    const availableControllers = controllersRes.data.instances
+    const controllersRes = await nova.api.controller.listControllers()
+    const availableControllers = controllersRes.instances
 
     console.log(`Available controllers:\n  `, availableControllers)
 
-    state.wandelApp = new WandelApp(api, cell, availableControllers)
+    state.wandelApp = new WandelApp(nova, availableControllers)
 
     if (!state.wandelApp.selectedMotionGroupId) {
       // No saved motion group, try to select the first available

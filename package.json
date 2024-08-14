@@ -30,6 +30,9 @@
     "@wandelbots/assets": "file:./local_packages/@wandelbots/assets",
     "@wandelbots/wandelbots-api-client": "<1.0.0",
     "@wandelbots/wandelbots-api-wrapper": "file:./local_packages/@wandelbots/wandelbots-api-wrapper",
+    "@wandelbots/wandelbots-js": "^1.6.0",
+    "@wandelbots/wandelbots-js-react-components": "^1.7.1",
+    "autoprefixer": "^10.4.19",
     "eslint-plugin-react-hooks": "^4.6.2",
     "lodash-es": "^4.17.21",
     "mobx": "^6.12.3",
@@ -39,9 +42,8 @@
     "react-dom": "^18",
     "reconnecting-websocket": "^4.4.0",
     "sharp": "^0.33.4",
-    "zod": "^3.23.8",
     "tailwindcss": "^3.4.4",
-    "autoprefixer": "^10.4.19"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "20.14.9",

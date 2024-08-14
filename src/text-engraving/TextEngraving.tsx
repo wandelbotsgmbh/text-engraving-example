@@ -14,7 +14,7 @@ import {
   useWandelApp,
 } from "@/WandelAppContext"
 import { autorun } from "mobx"
-import { ProgramState } from "@wandelbots/wandelbots-api-wrapper/ProgramRunner"
+import { ProgramState } from "@wandelbots/wandelbots-js"
 
 export default function TextEngraving() {
   const wandelApp = useWandelApp()
@@ -34,7 +34,6 @@ export default function TextEngraving() {
         isLoading &&
         programRunner.currentProgram.state === ProgramState.Completed
       ) {
-        programRunner.reset()
         increaseCellIndex()
         setIsLoading(false)
         setIsFinished(true)
@@ -42,22 +41,17 @@ export default function TextEngraving() {
     })
 
     return () => disposer()
-  }, [programRunner, isLoading])
+  }, [programRunner, isLoading, programRunner.currentProgram.state])
 
   const sendRequest = async (firstname: string, company: string) => {
-    const value = await wandelApp.api.programValues.getProgramValue(
-      wandelApp.cellId,
-      "cell_index",
-    )
-    let cell_index = parseInt(value.data as any)
+    const value =
+      await wandelApp.nova.api.programValues.getProgramValue("cell_index")
+    let cell_index = parseInt(value as any)
     console.log("current cell_index: " + cell_index)
 
     const plate_offset_value =
-      await wandelApp.api.programValues.getProgramValue(
-        wandelApp.cellId,
-        "plate_offset",
-      )
-    let plate_offset = parseInt(plate_offset_value.data as any)
+      await wandelApp.nova.api.programValues.getProgramValue("plate_offset")
+    let plate_offset = parseInt(plate_offset_value as any)
     console.log("current plate_offset: " + plate_offset)
 
     programRunner.executeProgram(
@@ -73,14 +67,12 @@ export default function TextEngraving() {
   }
 
   async function increaseCellIndex() {
-    const cell_index_value = await wandelApp.api.programValues.getProgramValue(
-      wandelApp.cellId,
-      "cell_index",
-    )
-    let cell_index = parseInt(cell_index_value.data as any)
+    const cell_index_value =
+      await wandelApp.nova.api.programValues.getProgramValue("cell_index")
+    let cell_index = parseInt(cell_index_value as any)
     cell_index = cell_index + 1
 
-    await wandelApp.api.programValues.createProgramsValue(wandelApp.cellId, {
+    await wandelApp.nova.api.programValues.createProgramsValue({
       cell_index: cell_index,
     })
 

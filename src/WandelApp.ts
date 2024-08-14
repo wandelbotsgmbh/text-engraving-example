@@ -4,11 +4,8 @@ import type {
 } from "@wandelbots/wandelbots-api-client"
 import { flatten, keyBy } from "lodash-es"
 import { makeAutoObservable } from "mobx"
-import { ConnectedMotionGroup } from "@wandelbots/wandelbots-api-wrapper/ConnectedMotionGroup"
-import { getWandelApi } from "./getWandelApi"
-import { env } from "./runtimeEnv"
-import type { WandelAPIWrapper } from "@wandelbots/wandelbots-api-wrapper"
-import { ProgramRunner } from "@wandelbots/wandelbots-api-wrapper/ProgramRunner"
+import { ConnectedMotionGroup, ProgramStateConnection } from "@wandelbots/wandelbots-js"
+import type { NovaClient } from "@wandelbots/wandelbots-js"
 
 export type MotionGroupOption = {
   selectionId: string
@@ -20,7 +17,7 @@ export type MotionGroupOption = {
 export class WandelApp {
   selectedMotionGroupId: string | null = null
 
-  programRunner: ProgramRunner | null = null
+  programRunner: ProgramStateConnection | null = null
 
   /**
    * Represents the current state of the selected motion group
@@ -28,8 +25,7 @@ export class WandelApp {
   activeRobot: ConnectedMotionGroup | null = null
 
   constructor(
-    readonly api: WandelAPIWrapper,
-    readonly cellId: string,
+    readonly nova: NovaClient,
     readonly availableControllers: ControllerInstance[],
   ) {
     ;(window as any).wandelApp = this
@@ -61,11 +57,12 @@ export class WandelApp {
   }
 
   async selectMotionGroup(motionGroupId: string) {
-    this.activeRobot = await getWandelApi().connectMotionGroup(env.CELL_ID!, motionGroupId)
+    this.activeRobot = await this.nova.connectMotionGroup(motionGroupId)
   }
 
   async startProgramRunner() {
-    this.programRunner = new ProgramRunner(this.api, this.cellId)
+    this.programRunner = new ProgramStateConnection(this.nova)
+    makeAutoObservable(this.programRunner);
   }
 
 }
