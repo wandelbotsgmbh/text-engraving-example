@@ -23,7 +23,7 @@ def draw_character(character_idx, character_start, scaling):
         
         for j=0..<len(strokes[i]):
             point = strokes[i][j]
-            pose = [scaling*point[0], scaling*point[1], 0, 0, 0, 0]
+            pose = (scaling*point[0], scaling*point[1], 0, 0, 0, 0)
             if j == 0:
                 move tool via line() to character_start :: pose :: moving_offset :: point_to_tcp :: ~tcp
                 move tool via line() to character_start :: pose :: point_to_tcp :: cutting_inset :: ~tcp
@@ -35,7 +35,7 @@ def draw_character(character_idx, character_start, scaling):
         move tool via line() to character_start :: pose :: moving_offset :: point_to_tcp :: ~tcp
         
     point = strokes[-1][0] 
-    next_character_pose = [scaling*(point[0] + next_character_offset), scaling*point[1], 0, 0, 0, 0]
+    next_character_pose = (scaling*(point[0] + next_character_offset), scaling*point[1], 0, 0, 0, 0)
     return character_start :: next_character_pose
 
 def draw_string(my_string, character_start_pose, scaling):
