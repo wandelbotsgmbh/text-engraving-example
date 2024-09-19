@@ -1,5 +1,7 @@
 # Text Engraving with Wandelscript
 
+Supports Wandelbots <=24.1
+
 An example of a minimal application for engraving character strings, e.g. names, with the help of Wandelscript. 
 
 To use our platform, please sign up for our [Wandelbots Platform program](https://portal.wandelbots.io/).
