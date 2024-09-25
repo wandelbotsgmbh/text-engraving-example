@@ -62,7 +62,7 @@ export default function TextEngraving() {
         cell_index: cell_index,
         plate_offset: plate_offset,
       },
-      activeRobot,
+      //activeRobot,
     )
   }
 
