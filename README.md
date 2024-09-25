@@ -1,6 +1,6 @@
 # Text Engraving with Wandelscript
 
-Supports Wandelbots <=24.1
+Tested with Wandelbots 24.4 (not compatible with <24.2)
 
 An example of a minimal application for engraving character strings, e.g. names, with the help of Wandelscript. 
 
