@@ -1,6 +1,6 @@
 # Text Engraving with Wandelscript
 
-Supports Wandelbots <=24.1
+Tested with Wandelbots 24.4 (not compatible with <24.2)
 
 An example of a minimal application for engraving character strings, e.g. names, with the help of Wandelscript. 
 
@@ -28,6 +28,8 @@ robot        |  tool
 
 
 To get the demo running, import the included robot settings `configuration.json` (which includes the robot model and TCP) into the settings App on the Wandelbots Home Screen. You can't directly use the configuration with a different setup but they serve as a guide line.
+
+If you are using a virtual robot, you have to change the TCP in the wandelscript from `TOOL 1` to `Flange` and disable the write IO operation.
 
 ## Usage
 

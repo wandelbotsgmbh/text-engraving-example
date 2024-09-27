@@ -43,33 +43,39 @@ export default function TextEngraving() {
     return () => disposer()
   }, [programRunner, isLoading, programRunner.currentProgram.state])
 
+  async function getProgramValue(key: string): Promise<number> {
+    try {
+      const value = await wandelApp.nova.api.programValues.getProgramValue(key)
+      return parseInt(value as any)
+    } catch (error) {
+      console.error(
+        `Failed to get program value for ${key}. Set default value 0:`,
+        error,
+      )
+      await wandelApp.nova.api.programValues.createProgramsValue({
+        [key]: 0,
+      })
+      return 0
+    }
+  }
+
   const sendRequest = async (firstname: string, company: string) => {
-    const value =
-      await wandelApp.nova.api.programValues.getProgramValue("cell_index")
-    let cell_index = parseInt(value as any)
+    const cell_index = await getProgramValue("cell_index")
     console.log("current cell_index: " + cell_index)
 
-    const plate_offset_value =
-      await wandelApp.nova.api.programValues.getProgramValue("plate_offset")
-    let plate_offset = parseInt(plate_offset_value as any)
+    const plate_offset = await getProgramValue("plate_offset")
     console.log("current plate_offset: " + plate_offset)
 
-    programRunner.executeProgram(
-      script,
-      {
-        my_name: firstname,
-        my_company: company,
-        cell_index: cell_index,
-        plate_offset: plate_offset,
-      },
-      activeRobot,
-    )
+    programRunner.executeProgram(script, {
+      my_name: firstname,
+      my_company: company,
+      cell_index: cell_index,
+      plate_offset: plate_offset,
+    })
   }
 
   async function increaseCellIndex() {
-    const cell_index_value =
-      await wandelApp.nova.api.programValues.getProgramValue("cell_index")
-    let cell_index = parseInt(cell_index_value as any)
+    let cell_index = await getProgramValue("cell_index")
     cell_index = cell_index + 1
 
     await wandelApp.nova.api.programValues.createProgramsValue({
