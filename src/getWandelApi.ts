@@ -1,29 +1,35 @@
 import { NovaClient } from "@wandelbots/wandelbots-js"
 import { env } from "./runtimeEnv"
-import type { AxiosRequestConfig } from "axios"
 
 let nova: NovaClient | null = null
 
+const getSecureUrl = (url: string): string => {
+    if (!url) {
+        return url;
+    }
+    return url.startsWith('http://') || url.startsWith('https://') 
+      ? url 
+      : url.includes('wandelbots.io') 
+        ? `https://${url}` 
+        : `http://${url}`;
+}
+
 export const getNovaClient = () => {
   if (!nova) {
+    const secureWandelAPIBaseURL = getSecureUrl(env.WANDELAPI_BASE_URL || "");
+    console.log(secureWandelAPIBaseURL)
     nova = new NovaClient({
-      cellId:  env.CELL_ID ?? "cell",
-      instanceUrl: `${env.WANDELAPI_BASE_URL}`,
-      username: env.NOVA_USERNAME,
-      password: env.NOVA_PASSWORD,
+      instanceUrl:
+        typeof window !== "undefined"
+          ? new URL(secureWandelAPIBaseURL || "", window.location.origin).href
+          : secureWandelAPIBaseURL || "",
+      cellId: env.CELL_ID || "cell",
+      username: env.NOVA_USERNAME || "",
+      password: env.NOVA_PASSWORD || "",
+      accessToken: env.NOVA_ACCESS_TOKEN || "",
       baseOptions: {
-        timeout: 60000,
-        ...(env.NOVA_USERNAME && env.NOVA_PASSWORD
-          ? ({
-              headers: {
-                Authorization:
-                  "Basic " +
-                  Buffer.from(
-                    env.NOVA_USERNAME + ":" + env.NOVA_PASSWORD,
-                  ).toString("base64"),
-              },
-            } satisfies AxiosRequestConfig)
-          : {}),
+        // Time out after 30 seconds
+        timeout: 30000,
       },
     })
   }
